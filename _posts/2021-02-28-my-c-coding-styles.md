@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "C Coding Comment Template"
-summary: "a template for creating comments in source code written in the C programming language. The use of comments is crucial in source code to explain the meaning, functionality, or provide information about the author and creation date."
+summary: "a template for creating comments in source code written in the C programming language"
 author: sangtdx
 date: '2023-11-20 1:35:23 +0530'
 category: ['programming']
