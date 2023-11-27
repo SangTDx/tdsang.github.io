@@ -2,7 +2,7 @@
 name: Sang Tran
 username: sangtdx
 bio: "Embedded Software Developer, based in Ho Chi Minh city, Viet Nam"
-site: https://sangtdx.github.io/
+site: https://sangtdx.github.io
 avatar: sangtdx.png
 email: sang.tran2197@gmail.com
 social:
