@@ -4,12 +4,12 @@ title:  "C Coding Comment Template"
 summary: "a template for creating comments in source code written in the C programming language. The use of comments is crucial in source code to explain the meaning, functionality, or provide information about the author and creation date."
 author: sangtdx
 date: '2023-11-20 1:35:23 +0530'
-category: ['jekyll','guides', 'sample_category']
-tags: jekyll
+category: ['programming']
+tags: programming
 thumbnail: /assets/img/posts/code.jpg
 keywords: C, multi categories and tags
 usemathjax: false
-permalink: /blog/adding-categories-tags-in-posts/
+permalink: /blog/my-c-coding-styles/
 ---
 
 ### Header file
