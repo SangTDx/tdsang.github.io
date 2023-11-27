@@ -30,20 +30,19 @@ johndoe:
       - title: "flickr"
         url: "https://flickr.com/johndoe"
 
-xplor4r:
-   name: Sujay kundu
-   username: xplor4r
-   site: https://sujaykundu.com
-   avatar: xplor4r.png
-   bio: "Full Stack Web Developer, based in Bangalore, India"
-   email: mail@sujaykundu.com
-   social:
+sangtdx:
+  name: Sang Tran
+  username: sangtdx
+  bio: "Embedded Software Developer, based in Ho Chi Minh city, Viet Nam"
+  site: https://sangtdx.github.io
+  avatar: sangtdx.png
+  email: sang.tran2197@gmail.com
+  social:
       - title: "github"
-        url: "https://github.com/sujaykundu777"
+        url: "https://github.com/SangTDx"
       - title: "linkedin"
-        url: "https://www.linkedin.com/in/sujaykundu"
+        url: "https://www.linkedin.com/in/sangtdx/"
       - title: "youtube"
-        url: "https://www.youtube.com/channel/UCSfLBFFfNU9r6ihfei6VeJw"
+        url: "https://www.youtube.com/@sanginit9795"
       - title: "facebook"
-        url: "https://www.facebook.com/sujay.kundu2"
-
+        url: "https://github.com/SangTDx"
