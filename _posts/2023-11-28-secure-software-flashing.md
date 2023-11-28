@@ -32,16 +32,21 @@ The required computational performance on the embedded system side shall be mini
 
 # DIGITAL SIGNATURES
 
+<figure style="text-align: center;" style="text-align: center;">
+  <img src="/assets/img/blogs/automotive/cybersecurity/sign-fw.png" alt="Secure software download." style="display: block; margin: 0 auto;">
+  <figcaption>Secure software download.</figcaption>
+</figure>
+
 The secure software flashing scheme we present is based on digital signatures. A digital signature provides the security objective of integrity and authenticity; data being digitally signed cannot be altered by a malicious third party without being detected by the receiver. Furthermore, the receiver can verify that the data was indeed signed by the claimed signer. Moreover, the signer is not able to deny that he is the legitimate creator of the signature (non-repudiation). Digital signatures are generated and verified with asymmetric cryptographic algorithms, such as the Rivest Shamir Adleman (RSA) algorithm or Elliptic Key Cryptography (ECC).
 
 A digital signature is computed as shown in Figure 1. There is a key pair consisting of a private key, SK, and a public key, PK. Only the signer has access to SK, whereas PK can be publicly distributed. In our setting, SK is only known to the manufacturer of the embedded system, whereas PK is built into every embedded system. The program code, x, is first hashed to a short fixed length value, y. Typically, y is computed by applying a hash function of the SHA family, resulting in an output of 20 to 32 bytes. Finally, a digital signature is computed over y using the private key, SK. The signature can then be verified by using the public key PK. Please note that the private key, SK, must never leave the secure environment of the manufacturer. Therefore, signatures are typically computed in High Security Modules (HSMs), such as smart card security controllers, which are used in banking applications and which provide tamper-resistant features in accordance with the Common Criteria (CC) security standard.
 
 <figure style="text-align: center;" style="text-align: center;">
-  <img src="/assets/img/blogs/automotive/cybersecurity/CERTIFICATES.png" alt="Secure software download." style="display: block; margin: 0 auto;">
-  <figcaption>Secure software download.</figcaption>
+  <img src="/assets/img/blogs/automotive/cybersecurity/CERTIFICATES.png" alt="Secure Firmware flashing using firmware signing." style="display: block; margin: 0 auto;">
+  <figcaption>Secure Firmware flashing using firmware signing.</figcaption>
 </figure>
 
-A public key is used in each embedded system and firmware programs are signed using the corresponding private key. It is possible to use an individual public/private key pair for each embedded system, vehicle model year, each ECU type, etc., however, this increases the logistics efforts of the overall system. In the case of individual public/private key pairs, it is reasonable to use certificates. A certificate is comparable to a passport; it certifies a public key and, if required, an identity. In the automotive case, the certificate is simply a public key signed by the OEM’s private key, together with the public key and some additional information: SigSK(PKA)|PKA|data. 
+A public key is used in each embedded system and firmware programs are signed using the corresponding private key. It is possible to use an individual public/private key pair for each embedded system, vehicle model year, each ECU type, etc., however, this increases the logistics efforts of the overall system. In the case of individual public/private key pairs, it is reasonable to use certificates. A certificate is comparable to a passport; it certifies a public key and, if required, an identity. In the automotive case, the certificate is simply a public key signed by the OEM’s private key, together with the public key and some additional information: SigSK(PKA),PKA, data.
 
 The flash program is then verified by PKA and signed with the corresponding private key. When the flashing process begins, the certificate first needs to be downloaded and verified using the OEM’s root public key PK, and then the flash program is downloaded and verified using PKA.
 
