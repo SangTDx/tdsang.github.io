@@ -9,7 +9,7 @@ tags: cybersecurity
 thumbnail: /assets/img/posts/car-cyber.png
 keywords: cybersecurity, automotive, multi categories and tags
 usemathjax: false
-permalink: /blog/introduction-about-cybersecurity/
+permalink: /blog/secure-software-flashing/
 ---
 
 # INTRODUCTION
