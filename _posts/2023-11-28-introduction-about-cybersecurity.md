@@ -6,7 +6,7 @@ author: sangtdx
 date: '2023-11-28 1:35:23 +0530'
 category: ['cybersecurity', 'automotive']
 tags: cybersecurity
-thumbnail: /assets/img/posts/ccar-cyber.png
+thumbnail: /assets/img/posts/car-cyber.png
 keywords: cybersecurity, automotive, multi categories and tags
 usemathjax: false
 permalink: /blog/introduction-about-cybersecurity/
