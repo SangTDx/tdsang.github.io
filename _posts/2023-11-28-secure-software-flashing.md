@@ -16,8 +16,8 @@ permalink: /blog/secure-software-flashing/
 
 More and more devices in our modern world come with a multitude and variety of embedded systems. An obvious example of this trend is today’s vehicles, which have dozens of electronic control units (ECUs) that control everything from the air conditioning and electric windows to the engine and brake system. Several ECUs allow downloading of updated program and data code via a boot loader. Such software might be a control unit firmware update for fixing bugs, for improving features, or for downloading data such as additional multimedia files. The first case is also called a software download or simply flashing (since flash memory is updated). The download might be performed directly over a diagnostic channel or another available communication channel such as Bluetooth and GSM.
 
-<figure style="max-width: 100%;">
-  <img src="/assets/img/blogs/automotive/cybersecurity/digital-signatures.png" alt="Figure 1. The generation of digital signatures at the embedded systems manufacturer." style="width: 100%;">
+<figure style="text-align: center;">
+  <img src="/assets/img/blogs/automotive/cybersecurity/digital-signatures.png" alt="Figure 1. The generation of digital signatures at the embedded systems manufacturer." style="display: block; margin: 0 auto;">
   <figcaption>Figure 1. The generation of digital signatures at the embedded systems manufacturer.</figcaption>
 </figure>
 
@@ -36,8 +36,8 @@ The secure software flashing scheme we present is based on digital signatures. A
 
 A digital signature is computed as shown in Figure 1. There is a key pair consisting of a private key, SK, and a public key, PK. Only the signer has access to SK, whereas PK can be publicly distributed. In our setting, SK is only known to the manufacturer of the embedded system, whereas PK is built into every embedded system. The program code, x, is first hashed to a short fixed length value, y. Typically, y is computed by applying a hash function of the SHA family, resulting in an output of 20 to 32 bytes. Finally, a digital signature is computed over y using the private key, SK. The signature can then be verified by using the public key PK. Please note that the private key, SK, must never leave the secure environment of the manufacturer. Therefore, signatures are typically computed in High Security Modules (HSMs), such as smart card security controllers, which are used in banking applications and which provide tamper-resistant features in accordance with the Common Criteria (CC) security standard.
 
-<figure style="max-width: 100%;">
-  <img src="/assets/img/blogs/automotive/cybersecurity/CERTIFICATES.png" alt="Secure software download." style="width: 100%;">
+<figure style="text-align: center;" style="text-align: center;">
+  <img src="/assets/img/blogs/automotive/cybersecurity/CERTIFICATES.png" alt="Secure software download." style="display: block; margin: 0 auto;">
   <figcaption>Secure software download.</figcaption>
 </figure>
 
@@ -57,8 +57,8 @@ A public key is used in each embedded system and firmware programs are signed us
 
  Protecting the key built into the embedded system is crucial. If an adversary is able to read out a symmetric key or replace a public key he might be able to manipulate program or data code. Thus, virtual software protection can be achieved only by using secure memory or applying hardware-assisted approaches employing a security anchor as described in reference 4.
 
- <figure style="max-width: 100%;">
-  <img src="/assets/img/blogs/automotive/cybersecurity/falash-process.png" alt="Figure 4. Flash process" style="width: 100%;">
+ <figure style="text-align: center;">
+  <img src="/assets/img/blogs/automotive/cybersecurity/falash-process.png" alt="Figure 4. Flash process" style="display: block; margin: 0 auto;">
   <figcaption>Figure 4. Flash process</figcaption>
 </figure>
 
