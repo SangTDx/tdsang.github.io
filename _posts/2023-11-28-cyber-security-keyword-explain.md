@@ -1,0 +1,113 @@
+---
+layout: post
+title:  "Secure Software Flashing for ECU"
+summary: "Cybersecurity Keywords of Automotive "
+author: sangtdx
+date: '2023-11-28 1:35:23 +0530'
+category: ['cybersecurity', 'automotive']
+tags: cybersecurity
+thumbnail: /assets/img/posts/car-cyber.png
+keywords: cybersecurity, automotive, multi categories and tags
+usemathjax: false
+permalink: /blog/cyber-security-keyword-explain/
+---
+
+# Domain Separation
+
+vDomain separation was until recently mainly a focus for European manufacturers and primarily driven by the limited data rates of the used bus systems. With ever increasing numbers of connected components per bus, adding additional busses to increase the overall bandwidth was a viable solution. However, this also had the beneficial side-effect of enabling effective security features, when the domains are properly separated and the cross domain traffic is monitored and filtered. It should be noted that this feature is only as strong as its weakest link, when one ECU allows the spanning of multiple networks without filtering, the added security is lost.
+
+# Public-Key-Infrastructure (PKI)
+
+A PKI is used to build a chain of trust that allows the different stakeholders such as manufacturers and suppliers to closely monitor and restrict the possibilities of interactions of ECUs with each other, a tester or the backend. A PKI is also the foundation for a secure authentication of hosts and initial integrity checks of their communication. Core component is a trusted storage, to store the root certificates that are allowed to update software or communicate securely. Depending on the scope of the PKI it could be for all components in a car, for manufacturers and all their cars, for an administrative domain of different cars, as well as regional or otherwise groupable sum of devices. Considered current-best-practice for remote authentication, the capabilities of a PKI can be very flexible regarding the revocation of access rights, granularity of permissions and their scope.
+
+However, the downside of operating a PKI is that they are costly, and the flexibility comes with the possible issue of increased complexity. Trust anchors such as root certificates have to be already in place before signatures can be verified, processes are needed to revoke certificates and to check their validity, and if the private key of a root certificate becomes compromised one needs mechanisms in place to change them in all affected devices. Especially the aspect of verifying validities should be referred as critical because without having a trustful time source on every device which cannot be manipulated certificates will lose a lot of benefits. Standard protocols for time synchronization, e. g., NTP, GSM, GPS or similar are not feasible for this task form a security point of view [7]. Without the option to check validity of crtificates aspects like time-limited feature activation or avoiding the execution of outdated software is not possible
+
+# Hardware Trust Anchor – Hardware Security Module
+
+Multiple types of hardware trust anchors are available, with different names and a wide range of functionality. Usually they should have a dedicated area in hardware as software can be modified at runtime, and a security enclave that protects sensitive material like cryptographic operations or stored keys. There is however no norm or formal definition on the specifics for the terms HTA and HSM. Every supplier can basically define its own silicon as HSM, as soon as any kind of cryptographic operation is running on the chip. That means during the vendor selection phase, an OEM has to verify every technical statement of the possible suppliers in detail. This lack of standardizations often leads to misleading interpretations from vendors if a customer asks, for example, if an HSM is inside. Occasionally we have already encountered HSM functionalities that are insecure and useless, e. g., having a secret key stored openly in RAM during runtime, or only allowing insecure modes of operation for the AES algorithm.
+
+Additionally, OEMs should ask suppliers if features from advertisements and marketing material supported by the hardware are already useable, or more precisely useable for the OEM. Often we have had cases where, e. g., elliptic curve cryptography was openly advertised, but in detail it turned out that the curves used were referred to as broken, or additional licenses to use specific secure curves were needed that were still under negotiation between the OEM and the rights owner.
+
+After all, an HSM is also just a piece of embedded software running on (dedicated) hardware with limited access rights, with the additional benefit that it is protected from inference and has only very few interaction features. These are usually sensitive in nature such as encrypt, verify or create key. OEMs should also verify that the software to use the HSM functionality is already fully implemented, usable, and tested. Test reports or even a certification or confirmations about, e. g., fulfilled NIST standards in specific parts such as for AES or other building blocks are very useful. Hence we strongly recommend that OEMs should involve not only their purchasing department during vendor selection phase, but also their security experts.
+
+HSMs today only make sense in the context of the whole car, i. e., as soon as a sensor, a minor device or similar is not protected by HSM trust anchor features such as message authentication or secure boot, attackers can compromise the unprotected device and use it as an entry point or stepping stone for further attacks. This was used for example in the Jeep hack by Charlie Miller and Chris Valasek [12]. That’s also the reason that currently fully-featured HSM are seldom in use, because OEM have to redesign the whole sensor - actor path with more secure (which means more expensive) hardware and software.
+
+As one of many HSM examples the EVITA project [5] defined three levels for their HSM interpretation, light, medium and full, and distinguishes them by their capability to compute asymmetric ciphers, random number generation, available counter modules and if they have a dedicated programmable ECU. An overview of the different components, which are usually implemented in software with corresponding hardware acceleration, can be seen in Figure 1. Similar approaches of classification exist for most vendors of HSMs.
+
+With the recent attacks in 2018 against Intel and other CPUs using side-channel attacks named Spectre and Meltdown [9], it has to be said that HSMs are no panacea in themselves.
+
+ <figure style="text-align: center;">
+  <img src="/assets/img/blogs/automotive/cybersecurity/system_architecture_of_an_HSM.png" alt="system architecture of an HSM" style="display: block; margin: 0 auto;">
+  <figcaption>system architecture of an HSM</figcaption>
+</figure>
+
+# Signed Updates
+
+To hinder an attacker from installing and executing unauthorized code on vehicular components such as ECUs and VCUs, updates should be digitally signed using internationally standardized cryptographic algorithms. This allows the verification of the authenticity and integrity of software updates. An exemplary signed update scheme is shown in Figure 4. To verify that the software is coming from an authorized source the component verifies the software update using public-key cryptography, e. g., RSA or ECC against a signature. This prevents an attacker from installing a modified software update, changing functionality, or reverting firmware versions. This is common practice for all major PC-based operating systems such as Windows, Linux and macOS, as well as smartphones and modern gaming consoles.
+
+To guarantee this security the base for the verification (keys/ certificates) has to be secure. The public keys/certificates on ECUs have to be tamperproof, because if the public key can be exchanged for the key of an attacker the verification process is compromised. The same holds true if the private key for the signature generation is compromised/stolen. If possible, a certificate-based approach.
+
+There is no common way to decide pro or con digital certificates. Every project has to evaluate the effort-benefit-ratio at the start of the project. Generally, the less security features a hardware has the more difficult it is to protect SW update verification keys/certificates and hence the lower the benefit of certificates will be in comparison to simple RSA/ECC signatures.
+
+# Diagnostic Service Security (UDS, XCP, . . . )
+
+Diagnostic Services have to be secured when they have consequences for safety, security or the quality of exhaust gases, according to ISO 14229 [3]. The used security mechanisms in the field today however are not secure. The used mechanisms are based on symmetric algorithms – no cryptographic algorithms – with seed lengths for the SecurityAccess of 1-4 byte length. For upcoming developments, a length of not less than 8 byte is used.
+
+The communication is up until now, after the initial authentication, only partially secured for updates and not for every instance. Among the many other issues in automotive components securitywise, this is one of the rather pressing ones.
+
+# Secure Boot
+
+Secure boot is used to verify the integrity of all software during start up using digital signatures. It is necessary to guarantee that the different runtime stages written in software, such as the bootloader, the operating system or even possibly applications, were not altered by unauthorized persons. While the bootloader and Cybersecurity Evaluation of Automotive E/E Architectures.
+
+ <figure style="text-align: center;">
+  <img src="/assets/img/blogs/automotive/cybersecurity/Secure_Boot_Schematic.png" alt="Secure Boot Schematic" style="display: block; margin: 0 auto;">
+  <figcaption>Secure Boot Schematic</figcaption>
+</figure>
+
+operating system are usually under control of the manufacturer or Tier-1, custom applications can possibly come from official app stores or even third party vendors, which can make the publishing process more complicated. As common for most soft security terms the term secure boot is not standardized, however there is a common interpretation of that term on the market: the integrity of software is calculated in multiple stages. Every stage in the boot process is only started if the previous stage could verify its integrity successfully – otherwise the start-up halts or the ECU reboots.
+
+To securely store the key for signature generation, a TPM or hardware trust anchor is required. It assures that the public keys or certificates which act as trust anchors are stored inside nonvolatile memory and cannot be manipulated or deleted. Such a trust anchor can be publicly readable, as usually RSA or ECC public keys are used as well as their root certificates in terms of certificate based secure boot approaches. They do not need to be secret, or kept confidential. If such data is one-time-programmable, i. e., it can only be written once and never again (e. g., PROM). Care has to be taken as in consequence in case of security issues (e. g., stolen private keys) such a trusted anchor cannot be easily replaced or simply revoked
+
+If it is a requirement to have that trusted data to be updateable over the whole product lifecycle, a very secure access method is required to allow such a replacement or revocation. ECU producers should always inquire at silicon vendors if it is possible and allowed for their customers to replace / revoke data from trusted anchor locations. It is highly recommended not to trust in security marketing statements but to ask for technical details confirmed in writing.
+
+If it is a requirement to have that trusted data to be updateable over the whole product lifecycle, a very secure access method is required to allow such a replacement or revocation. ECU producers should always inquire at silicon vendors if it is possible and allowed for their customers to replace / revoke data from trusted anchor locations. It is highly recommended not to trust in security marketing statements but to ask for technical details confirmed in writing.
+
+A subtype of secure boot is authenticated boot, which is a mechanism that can verify the integrity of the started software as well but the necessary checks are calculated in parallel, or even after start-up. This means that halting the startup-process is not possible, and the execution of untrusted software cannot be prevented. This is the trade-off for a faster boot time, but considered less secure. A manufacturer can use it to remotely assess the software running in the vehicle, but is only able to detect modifications without effectively mitigating them without additional means. For detecting attackers though, this is a feasible path.
+
+# Backend Communication (TLS & hardened TLS)
+
+Some cars feature communication modules to interact with a backend system that allows users to remotely control car features and request information about their car. Current best-practices for encrypting and authenticating communication contents on the network layer are achieved using the TLS protocol suite [8]. While it is currently the protocol most commonly used world-wide with billions of connections every day, it can be tricky to achieve a strong level of security by configuring every option correctly.
+
+For one, configurations have to be adaptable both for algorithmic primitives and for changes in current best-practices which can happen swiftly. Numerous publicly discussed instances document cases where the communication was insufficiently protected, such as for example in E-Mail protocols [11]. While usually the exchanged certificates are tested against validity, mechanisms can be employed that further harden the TLS connection. This could be certificate pinning, meaning that only a specific certification authority is allowed to authenticate endpoints, TLS tunneling for VPN-like connections as well as TLS-based VPN, and enforcing TLS connections. In the near future TLS 1.3 will be released, and while the previous versions were standardized allowing mechanisms to reduce the security of end-to-end encryption, the upcoming version is expected to be both resilient against attacks and using sane default primitives.
+
+Entire books have been written about hardening of TLS, while the one by Ivan Ristic Bulletproof SSL and TLS is at the time of writing the most comprehensive resource [17]. Future use cases could include predictive maintenance, or real-time geolocation, and many more. Currently only a very limited set of cars with yearly subscriptions allow for this. This is expected to rise, due to the versatility of TLS and existing experiences from large number of users and websites that employ TLS.
+
+# Secure Car Internal Communication
+
+The in-vehicular communication has, up until now with only a few minor exceptions, no security features at all. Currently only the CRC features of the CAN or other simple test values that offer no effective security are used, the focus was and mostly still is primarily on safety. The reason for this is that with the short payload of CAN messages and the restricted datarates it is not viable to add security as this would increase the overhead in proportions that are not feasible. Newer bus systems, e. g., CAN FD, will help mitigating this problem with increased payload sizes, but that means that all nodes have to support this new features.
+
+The focus on safety will be shifting, as the SecOC AUTOSAR module demonstrates the intentions to protect the authenticity and integrity of data in-transit. Capabilities of automotive components however still struggle with the performance overhead and there is no best-practice available, although the presented HSM can help with an asynchronous computation on an additional logic core.
+
+# Firewall for On- & Off-Board Communication
+
+Firewalls are used to filter and block data streams at network perimeters, internal network hubs based on hosts. The filters are based on a multitude of properties, starting with trivial filtering by point of origin or destination, ramping up to deep inspection of the payload. Firewalls for individual ECUs are commonly used to filter incoming messages by their CAN-IDs. For high-volume channels such as gateways, these firewalls as well as routing logic usually have performance implications. The same filter mechanisms are used for wireless connections with backend-server, so only certain services are received. The firewall features in both ECUs and VCUs usually have no logging mechanisms, but this is likely to change with the upcoming connection features where the entire car is online. An upcoming issue will be the rule updates, as in-place component upgrades with newer component generation could violate the existing rules or service oriented architectures with a dynamic allocation of services to ECUs. The same problem exists for cars with high configuration variability, as the configuration management and rule maintenance will become complex.
+
+The first firewalls in cars which can report irregularities of internal car communication will soon become available on the market. Due to performance implications, this kind of observation will most likely be shifted to a high-performance cluster within the car. For more complex analysis aggregated data will be sent to an IT backend/cloud service in a secure manner. We also find it likely that an artificial intelligence approach will be used to have self-learning firewalls, but it has to be seen what the implications are on regular usage, how they are trained, and what happens if messages are falsely classified. For Ethernet connections, plenty of existing knowledge from the PC world can be used, but for automotive applications there is still plenty of learning to be done.
+
+In general, a firewall as it is will not protect any system – the filtering rules as well as the possibility to update these rules very fast will make a firewall powerful. As long as artificial intelligence will be trained by data designed by humans, it will be likely the case that real intelligence of such a firewall is still to be derived.
+
+# Intrusion Detection / Prevention Systems
+
+IDSs/IPSs are systems like firewalls but in contrast to firewalls are not located on network perimeters but inside the networks that shall be secured by monitoring/controlling the network traffic. Intrusion Detection Systems monitor the system/network and send logs to a backend system for further analysis. The detection mechanisms are primarily based on rules that have to be kept up to date and can be circumvented [20]. This makes continued updates and thus a backend connection necessary. Reaction times of IDSs for rule updates can be extensive, spanning up to multiple days or more in case of slow connectivity. An IPS further allows to directly influence the network or host by, e. g., prohibiting specific connections that match a known bad communication signature.
+
+ID/IP systems can be distinguished in host and network based systems, where they safeguard individual ECUs, or the network domain. They can be realized as individual hardware component but also in software on an existing host. IDSs/IPSs are rather effective and until 2023+ expected by us to become a common security countermeasure to mitigate security risks. Nevertheless, it has to be mentioned that an IPS can have negative impacts on safety related functions. There is the posibility for the IPS to detect a false-positive, e. g., many brake signals are detected just before a crash which might be interpreted by an IPS as an attack. This aspect will become more critical in terms of future machine learning IPS algorithms. That means whenever an IPS will be used a backup path is necessary to supervise all IPS interpretations which will have performance impacts as well as liability aspects. An IDS in general is less critical because detection rules will be pre-defined by humans and only these rules will be applied. Of course there is still the possibility for human errors when defining such IDS rules but these can be minimized using a well-defined update process and rigorous testing.
+
+# Wi-Fi Security (Client & Back End)
+
+For connecting client devices such as smartphones with the car, communication should be secured by known good measures, i. e., WPA2 for Wi-Fi that is spawned by the car, using strong passwords. These should be random and auto-generated if sufficient entropy is available, for example at the final assembly at the factory. For WPA2, the length of the password is of importance as there exist dictionary-based brute force attacks using, e. g., the tool hashcat [14]. As long as WPA3 is not yet fully specified and rolled out, additional policies can make sense such as regular password rotation or physical switches for connectivity features. As soon as WPA3 or higher will be available on the market, customers and OEMs should have a long-term update strategy to always support only the latest communication protocols.
+
+Additional security measures could be placed on top of the network layer, such as an app that encrypts communication content on the application layer as well as using either a pinned TLS connection, or a shared secret which is only know to the car and the device after securely pairing them. This would yield three layers of encryption, which would make impersonation or replay attacks very difficult.
+
+To allow cars to automatically connect to Wi-Fi networks with known SSIDs, further efforts are required to prevent connections with rogue access points. Examples could include specific workshop equipment workshop equipment or at gas stations. This is for example used in Tesla’s Model S, which automatically connects to Tesla Service and Tesla Guest at their supercharger stations to provide connectivity and remote diagnostics [18]. Since the VCU will be constantly scanning for these known SSIDs in the background during runtime, it is very easy for an attacker to figure them out. Also MAC address filters are insufficient, as the MAC address can be modified easily.
+
+For backend connections, every connection should be explicitly whitelisted, encrypted and authenticated, in particular if sensitive information like diagnostic codes or private data is transmitted. Additionally, every connection attempt should be logged and analyzed to detect brute-forcing attacks in a timely matter. It is beneficial to include these metrics into intrusion detection systems since wireless signals are much harder to confine locally.
