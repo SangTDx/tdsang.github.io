@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Cybersecurity Keywords of Automotive"
-summary: "Cybersecurity Keywords of Automotive"
+title:  "Cybersecurity Keywords for Automotive"
+summary: "Cybersecurity Keywords for Automotive"
 author: sangtdx
 date: '2023-11-28 1:35:23 +0530'
 category: ['cybersecurity', 'automotive']
