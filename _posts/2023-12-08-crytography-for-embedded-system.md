@@ -1,7 +1,7 @@
 ---
-title: Crytography for Embedded System
+title: Cryptography for Embedded System
 layout: post
-summary: Overview about Crytography for Embedded System
+summary: Overview about Cryptography for Embedded System
 author: sangtdx
 date: '2023-11-28 1:35:23 +0530'
 category:
