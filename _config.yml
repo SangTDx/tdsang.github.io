@@ -50,10 +50,10 @@ author_work_experiences:
 
 # Education
 author_education_details:
-              - college_logo: mit.png
-                college_name: MIT
-                college_url: https://mit.org
-                college_degree: CS Engineer
+              - college_logo: hcmute.png
+                college_name: HCMC University of Technology and Education
+                college_url: https://hcmute.edu.vn/
+                college_degree: Engineering
                 description: Bachelor of Technology
                 visibility: true
 
