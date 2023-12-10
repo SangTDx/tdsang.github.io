@@ -64,7 +64,7 @@ Use cases - Cryptography is applied for other use cases, not only for confidenti
  - The secret is the process and once known – it can be decrypted
 by anyone
 
-**3.1 HARDWARE-BASED CRYPTOGRAPHY**
+## 3.1 HARDWARE-BASED CRYPTOGRAPHY
 - The Middle Ages (15th century): The Alberti wheel from Italy
 <figure style="text-align: center;">
   <img src="/assets/img/blogs/automotive/cybersecurity/CRYPTOGRAPHY/Alberti_wheel_from_Italy.png" alt="The Alberti wheel from Italy" style="display: block; margin: 0 auto;">
@@ -72,6 +72,77 @@ by anyone
 </figure>
 - The 19th century from the USA
 <figure style="text-align: center;">
-  <img src="/assets/img/blogs/automotive/cybersecurity/CRYPTOGRAPHY/From_the_USA.png" alt="From the USA" style="display: block; margin: 0 auto;">
-  <figcaption>“The 19th century from the USA”</figcaption>
+  <img src="/assets/img/blogs/automotive/cybersecurity/CRYPTOGRAPHY/From_the_USA.png" alt="Security by Obscurity" style="display: block; margin: 0 auto;">
+  <figcaption>“Security by Obscurity”</figcaption>
 </figure>
+
+## 3.2 AN IMPORTANT ADDITION –THE “KEY”
+- A secret process like ATBASH is “Security by Obscurity” and is not really secure
+- The Alberti Wheel added something new:
+
+<figure style="text-align: center;">
+  <img src="/assets/img/blogs/automotive/cybersecurity/CRYPTOGRAPHY/Security-by-Obscurity.png" alt="From the USA" style="display: block; margin: 0 auto;">
+  <figcaption>“Security by Obscurity”</figcaption>
+</figure>
+
+- Different relative positions of the inner wheel will produce different ciphertexts
+- The relative position of the wheels is the "KEY" but the process stays the same: Substitute each letter in the inner wheel with the adjacent letter in the outer wheel
+
+## 3.3 TERMINOLOGY
+- We call the cryptographic process “Algorithm” or “Protocol”
+- We differentiate between instances of the same algorithm with different keys
+
+<figure style="text-align: center;">
+  <img src="/assets/img/blogs/automotive/cybersecurity/CRYPTOGRAPHY/different-keys.png" alt="algorithm with different keys" style="display: block; margin: 0 auto;">
+  <figcaption>“Algorithm with different keys”</figcaption>
+</figure>
+
+## 3.4 Kerckhoffs’ Law
+- The algorithm can be public
+- Only the key must be secret
+- The key can be changed, transported and stored
+- The algorithm may be applied to all relevant data types:
+	- Text, maps…
+- The process should be easy (complexity ≠ security, fewer logistics = better security)
+
+## 3.5 HOW CAN WE BREAK A CIPHER?
+- There is one attack method that will always succeed: **Brute-force attack**
+- We can try every possible key until we hit something meaningful. Such exhaustive searches over the entire key space are called ***“brute force attacks”***
+- Brute force attacks will ***always*** succeed, unless we make them impractical:
+	- Impractical = too long = until the sun runs out of hydrogen
+	- Impractical = not enough silicon on earth for building HW that will do it
+	- Impractical = not enough silicon on earth for building HW that will do it
+	- Impractical = too long = for the lifespan of a device
+- We want brute force attacks to be expensive ***enough*** for our adversaries
+
+## 3.6 HISTORY CAN TEACH US MANY LESSONS
+- We always want robust ciphers, that cannot be cryptanalyzed 
+- How do we know what can be trusted? 
+- This is not easy, better left to professional specialist mathematicians 
+- It is far easier to know what CANNOT be trusted, especially when the author claims that the proposed scheme is unbreakable…
+- We call such bogus products “Snake Oil” and there are some telltale signs:
+	- 1st and foremost à not in the common standards 
+	- Unreasonable key sizes (“128 bits is weak, we use a key with ten thousand bits”) 
+	- Claiming “military-grade” encryption 
+	- No peer review, “trust us, we know what we do” 
+	- Algorithm not disclosed (remember Kerckhoff?)
+- Some Cipher machine in history:
+	- THE ZIMMERMAN TELEGRAM –WW1, 1917
+	- WW2 – the German army used a sophisticated cipher machine called “Enigma”:
+		- Originally built for banks
+		- 3 rotors with ~158,000,000,000,000,000,000 combinations, a 4th rotor was added later
+		- Initial cryptanalysis started in Poland and results were shared with the UK, including a crude design of a cryptanalysis machine
+		- The German generals used a different machine with twelve rotors - the Lorenz machine
+
+<figure style="text-align: center;">
+  <img src="/assets/img/blogs/automotive/cybersecurity/CRYPTOGRAPHY/Enigma_Machine.png" alt="machine called “Enigma”" style="display: block; margin: 0 auto;">
+  <figcaption>“Machine called “Enigma””</figcaption>
+</figure>
+
+- Today cryptography happens behind the scene in many places, such as web browsers:
+
+<figure style="text-align: center;">
+  <img src="/assets/img/blogs/automotive/cybersecurity/CRYPTOGRAPHY/moden-time.png" alt="web browsers" style="display: block; margin: 0 auto;">
+  <figcaption>“web browsers”</figcaption>
+</figure>
+
