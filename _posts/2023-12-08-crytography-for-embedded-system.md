@@ -245,7 +245,7 @@ Example 1:
 - These are called “block ciphers”
 
 <figure style="text-align: center;">
-  <img src="/assets/img/blogs/automotive/cybersecurity/CRYPTOGRAPHY/block-ciphers.png" alt="block ciphers" style="display: block; margin: 0 auto;">
+  <img src="/assets/img/blogs/automotive/cybersecurity/CRYPTOGRAPHY/block-ciphers.png" alt="block ciphers" style="width: 100%; object-fit: contain ">
   <figcaption>“block ciphers”</figcaption>
 </figure>
 
