@@ -17,6 +17,20 @@ permalink: "/blog/crytography-for-embedded-system/"
 
 Hi Everyone! This training is focused on its applications in the embedded context.
 
+- [1. Cryptography Definition](#1-cryptography-definition)
+- [2. The Ecosystem](#2-the-ecosystem)
+- [3. A Little bit of History](#3-a-little-bit-of-history)
+  - [3.1 HARDWARE-BASED CRYPTOGRAPHY](#31-hardware-based-cryptography)
+  - [3.2 AN IMPORTANT ADDITION –THE “KEY”](#32-an-important-addition-the-key)
+  - [3.3 TERMINOLOGY](#33-terminology)
+  - [3.4 Kerckhoffs’ Law](#34-kerckhoffs-law)
+  - [3.5 HOW CAN WE BREAK A CIPHER?](#35-how-can-we-break-a-cipher)
+  - [3.6 HISTORY CAN TEACH US MANY LESSONS](#36-history-can-teach-us-many-lessons)
+- [4. SYMMETRIC CIPHERS](#4-symmetric-ciphers)
+  - [4.1 A SIMPLE EXAMPLE](#41-a-simple-example)
+  - [4.2 THE GENERIC ALGORITHM](#42-the-generic-algorithm)
+  - [4.3 A PRACTICAL ALGORITHM](#43-a-practical-algorithm)
+
 # 1. Cryptography Definition
 
  - Cryptography (AKA “encryption”) is a set of techniques & computations that are applied for securing data and communication against interception and eavesdropping.
@@ -190,5 +204,5 @@ Example 1:
 
 <figure style="text-align: center;">
   <img src="/assets/img/blogs/automotive/cybersecurity/CRYPTOGRAPHY/PRACTICAL-ALGORITHM.png" alt="common symmetric algorithm" style="display: block; margin: 0 auto;">
-  <figcaption>“common symmetric algorithm”</figcaption>
+  <figcaption>“symmetric encryption ALGORITHM”</figcaption>
 </figure>
