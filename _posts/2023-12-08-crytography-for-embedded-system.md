@@ -146,3 +146,49 @@ by anyone
   <figcaption>“web browsers”</figcaption>
 </figure>
 
+# 4. SYMMETRIC CIPHERS
+## 4.1 A SIMPLE EXAMPLE
+Example 1: 
+- **Simple modulo addition as the algorithm:** 
+	- Encryption algorithm: Ciphertext = Plaintext + Key MOD 10 
+	- Decryption algorithm: Plaintext = Ciphertext + Key MOD 10
+	- Plaintext = “9” o Key = “5” o Encryption: “9” + “5” MOD 10 = “4” 
+	- Decryption: “4” + “5” MOD 10 = “9” 
+- The decryption process is identical to the encryption in this case 
+- The key must be pre-shared or agreed between parties 
+	- Because both parties must apply the same key
+- In the previous example, both parties applied the same key, with an identical algorithm
+- In other cases, the encryption & decryption algorithms can be different but are always related
+- Regardless of the algorithms, **the same pre-shared key is used by both parties**
+
+<figure style="text-align: center;">
+  <img src="/assets/img/blogs/automotive/cybersecurity/CRYPTOGRAPHY/symmetric_encryption.png" alt="This is called “symmetric encryption”" style="display: block; margin: 0 auto;">
+  <figcaption>“This is called “symmetric encryption””</figcaption>
+</figure>
+
+## 4.2 THE GENERIC ALGORITHM
+- The algorithm is always a fixed process-
+- The specific key allows multiple instances, which are opaque to each other
+
+<figure style="text-align: center;">
+  <img src="/assets/img/blogs/automotive/cybersecurity/CRYPTOGRAPHY/SYMMETRIC-CIPHERS-algo.png" alt="symmetric encryption ALGORITHM" style="display: block; margin: 0 auto;">
+  <figcaption>“symmetric encryption ALGORITHM”</figcaption>
+</figure>
+
+## 4.3 A PRACTICAL ALGORITHM
+- Simple addition is obviously not robust enough, we want much better masking of the plaintext and much higher resistance to cryptanalysis
+- The most common symmetric algorithm today is AES, which is a sequence of very simple operations, that also depend on the key:
+  - XOR with the key
+  - Write data in a 4X4 matrix
+  - Swap rows & columns in matrix
+  - Permutate values (i.e., mix bits in a column from the matrix)
+  - Substitute values (i.e., “C” will be mapped to “W”)
+  - Add/subtract modulo
+  - Multiple rounds (10, 12 & 14 for 128. 192 & 256 bits respectively)
+- Most of the steps use simple lookup tables, so are very fast
+- Other common algorithms: Triple-DES, Twofish, RC4, XTEA…
+
+<figure style="text-align: center;">
+  <img src="/assets/img/blogs/automotive/cybersecurity/CRYPTOGRAPHY/PRACTICAL-ALGORITHM.png" alt="common symmetric algorithm" style="display: block; margin: 0 auto;">
+  <figcaption>“common symmetric algorithm”</figcaption>
+</figure>
