@@ -33,6 +33,7 @@ permalink: /blog/my-c-coding-styles/
 /*----------------------------------------------------------------------------*/
 /* Include Headers                                                            */
 /*----------------------------------------------------------------------------*/
+
 /** 
  * @brief Include headers required for the project functionality.
  */
@@ -42,6 +43,7 @@ permalink: /blog/my-c-coding-styles/
 /*----------------------------------------------------------------------------*/
 /* Constants and Macros                                                       */
 /*----------------------------------------------------------------------------*/
+
 /** 
  * @brief Define project-specific constants and macros.
  */
@@ -50,6 +52,7 @@ permalink: /blog/my-c-coding-styles/
 /*----------------------------------------------------------------------------*/
 /* Data Types                                                                 */
 /*----------------------------------------------------------------------------*/
+
 /** 
  * @brief Define custom data types used in the project.
  */
@@ -61,6 +64,7 @@ struct MyStruct {
 /*----------------------------------------------------------------------------*/
 /* Function Declarations                                                      */
 /*----------------------------------------------------------------------------*/
+
 /** 
  * @brief Declare functions used in the project.
  */
@@ -70,6 +74,7 @@ int my_function2(int a, int b);
 /*----------------------------------------------------------------------------*/
 /* Global Variables                                                           */
 /*----------------------------------------------------------------------------*/
+
 /** 
  * @brief Declare global variables used in the project.
  */
@@ -97,6 +102,7 @@ extern int g_variable;
 /*----------------------------------------------------------------------------*/
 /* Include Headers                                                            */
 /*----------------------------------------------------------------------------*/
+
 /** 
  * @brief Include the corresponding header file.
  */
@@ -105,6 +111,7 @@ extern int g_variable;
 /*----------------------------------------------------------------------------*/
 /* Constants and Macros                                                       */
 /*----------------------------------------------------------------------------*/
+
 /** 
  * @brief Define project-specific constants and macros.
  */
@@ -113,6 +120,7 @@ extern int g_variable;
 /*----------------------------------------------------------------------------*/
 /* Data Types                                                                 */
 /*----------------------------------------------------------------------------*/
+
 /** 
  * @brief Define custom data types used in the project.
  */
@@ -124,6 +132,7 @@ struct MyStruct {
 /*----------------------------------------------------------------------------*/
 /* Function Declarations                                                      */
 /*----------------------------------------------------------------------------*/
+
 /** 
  * @brief Declare functions used in the project.
  */
@@ -133,6 +142,7 @@ int my_function2(int a, int b);
 /*----------------------------------------------------------------------------*/
 /* Static Variables                                                           */
 /*----------------------------------------------------------------------------*/
+
 /** 
  * @brief This section defines static variables used internally in this file.
  * 
@@ -145,17 +155,18 @@ static char static_variable2 = 'A';     /**< Description of staticVariable2 */
 /*----------------------------------------------------------------------------*/
 /* Function Implementations                                                   */
 /*----------------------------------------------------------------------------*/
+
 /**
- * @brief Implementation of my_function2.
- * @param1: (IN) Description of the first parameter.
- * @param2: (OUT) Description of the second parameter.
- * @param3: (IN/OUT) Description of the second parameter.
+ *  @brief Implementation of my_function2.
+ *  @param1: (IN) Description of the first parameter.
+ *  @param2: (OUT) Description of the second parameter.
+ *  @param3: (IN/OUT) Description of the second parameter.
  *
- * Detailed description of the function and its behavior.
+ *  @details Detailed description of the function and its behavior.
  *
- * @return: Description of the return value or what it signifies.
+ *  @return: Description of the return value or what it signifies.
  *
- * Written by [Your Name]
+ *  Written by [Your Name]
  */
 int my_function2(int a, int b) {
     // Implementation of the addition operation
