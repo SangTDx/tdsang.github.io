@@ -182,3 +182,5 @@ int my_function2(int a, int b) {
 [https://github.com/MaJerle/c-code-style](https://github.com/MaJerle/c-code-style)
 
 [https://users.ece.cmu.edu/~eno/coding/CCodingStandard.html](https://users.ece.cmu.edu/~eno/coding/CCodingStandard.html)
+
+[Liên kết tới trang demo](temp/bai_giang_hoi_thi/index.html)
